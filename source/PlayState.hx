@@ -94,7 +94,8 @@ class PlayState extends FlxState
 
 		if (scoreIncrease > 0)
 		{
-			final incAmount = ((score + scoreIncrease) - score) / 10;
+			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score) / 10, 0);
+			FlxG.watch.addQuick('incAmount', incAmount);
 
 			score += incAmount;
 			scoreIncrease -= incAmount;
