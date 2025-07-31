@@ -1,31 +1,41 @@
 package;
 
 import flixel.FlxSprite;
-import flixel.ui.FlxSpriteButton;
 
-class DifficultyButton extends FlxSpriteButton
+class DifficultyButton extends FlxSprite
 {
-	override public function new(x:Float = 0.0, y:Float = 0.0, label:Int = 0)
+	override public function new(x:Float = 0.0, y:Float = 0.0, diff:Int = 0)
 	{
-		var button:FlxSprite = new FlxSprite().loadGraphic('assets/images/difficulties.png', true, 64, 64);
+		super(x, y);
 
-		button.animation.add('easy', [0]);
-		button.animation.add('normal', [1]);
-		button.animation.add('hard', [2]);
-		button.animation.add('arrow', [3]);
+		loadGraphic('assets/images/difficulties.png', true, 64, 64);
 
-		switch (label)
+		animation.add('easy', [0]);
+		animation.add('normal', [1]);
+		animation.add('hard', [2]);
+		animation.add('arrow', [3]);
+
+		switchDiff(diff);
+
+		#if MOBILE_BUILD
+		scale.set(6, 6);
+		#else
+		scale.set(2, 2);
+		#end
+	}
+
+	public function switchDiff(diff:Int = 0)
+	{
+		switch (diff)
 		{
 			default:
-				button.animation.play('arrow');
+				animation.play('arrow');
 			case 1:
-				button.animation.play('easy');
+				animation.play('easy');
 			case 2:
-				button.animation.play('normal');
+				animation.play('normal');
 			case 3:
-				button.animation.play('hard');
+				animation.play('hard');
 		}
-
-		super(x, y, button);
 	}
 }

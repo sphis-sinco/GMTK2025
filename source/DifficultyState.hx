@@ -5,9 +5,16 @@ import flixel.FlxState;
 
 class DifficultyState extends FlxState
 {
+	var difficulty:DifficultyButton;
+	var diff:Int = 2;
+
 	override function create()
 	{
 		super.create();
+
+		difficulty = new DifficultyButton(0, 0, diff);
+		difficulty.screenCenter();
+		add(difficulty);
 
 		changeDifficulty();
 	}
@@ -27,5 +34,13 @@ class DifficultyState extends FlxState
 		}
 	}
 
-	function changeDifficulty(change:Int = 0) {}
+	function changeDifficulty(change:Int = 0)
+	{
+		diff += change;
+
+		diff = (diff < 1) ? 1 : diff;
+		diff = (diff > 3) ? 3 : diff;
+
+		difficulty.switchDiff(diff);
+	}
 }
