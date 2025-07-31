@@ -118,7 +118,7 @@ class IntroState extends FlxState
 		text.visible = false;
 		FlxG.camera.fade(FlxColor.WHITE, 1, true);
 
-		logo.scale.set(1 / 8, 1 / 8);
+		logo.scale.set(#if MOBILE_BUILD 1 / 4, 1 / 4 #else 1 / 8, 1 / 8 #end);
 		logo.screenCenter();
 		add(logo);
 
