@@ -4,7 +4,13 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Ropasci" file="Ropasci" main="Main" version="1" company="Sinco" />
+	<define name="MOBILE_BUILD" if="mobile || MOBILE_TESTING"/>
+
+	<app file="Ropasci" main="Main" version="3" company="Sinco"/>
+	
+	<app title="Ropasci (Desktop)" if="desktop" />
+	<app title="Ropasci (Mobile)" if="MOBILE_BUILD" />
+	<app title="Ropasci (Web)" if="html5" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
@@ -25,7 +31,6 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
 
 	<!--Mobile-specific-->
-	<define name="MOBILE_BUILD" if="mobile || MOBILE_TESTING"/>
 	<window if="MOBILE_BUILD" orientation="landscape" fullscreen="true" width="0" height="0" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
