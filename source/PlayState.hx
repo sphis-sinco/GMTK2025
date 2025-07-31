@@ -37,7 +37,7 @@ class PlayState extends FlxState
 		{
 			score = 0;
 			if (FlxG.save.data.score != null)
-				scoreIncrease = FlxG.save.data.score;
+				score = FlxG.save.data.score;
 		}
 		if (requestedBT == null)
 		{
@@ -90,9 +90,8 @@ class PlayState extends FlxState
 
 			score += incAmount;
 			scoreIncrease -= incAmount;
+			FlxG.save.data.score = score;
 		}
-
-		FlxG.save.data.score = score;
 
 		if (!go)
 		{
