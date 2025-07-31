@@ -142,17 +142,23 @@ class PlayState extends FlxState
 
 				playerLastPick = playerPick;
 
-				var result = switch [playerPick, enemyPick]
+				var result = '';
+
+				switch [playerPick, enemyPick]
 				{
-					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]: 'ENEMY VICTORY!';
+					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]:
+						result = 'ENEMY VICTORY!';
+						FlxG.sound.play('assets/sfx/Fail.wav');
 
-					case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]: 'PLAYER VICTORY!';
+					case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]:
+						scoreIncrease += FlxG.random.int(100, 300);
+						result = 'PLAYER VICTORY!';
+						FlxG.sound.play('assets/sfx/Victory.wav');
 
-					case _: 'TIE!';
+					case _:
+						result = 'TIE!';
+						FlxG.sound.play('assets/sfx/Tie.wav');
 				}
-
-				if (result.toLowerCase() == 'player victory!')
-					scoreIncrease += FlxG.random.int(100, 300);
 
 				trace('result: $result');
 				endingEventHappened = true;
