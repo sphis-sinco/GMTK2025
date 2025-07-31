@@ -121,13 +121,13 @@ class IntroState extends FlxState
 			ease: FlxEase.expoIn,
 			onComplete: _tween ->
 			{
-				FlxG.switchState(() -> new PlayState());
+				FlxG.switchState(() -> new DifficultyState());
 			}
 		});
 	}
 
 	private function finishTween():Void
 	{
-		FlxG.switchState(() -> new PlayState());
+		FlxG.switchState(() -> new DifficultyState());
 	}
 }
