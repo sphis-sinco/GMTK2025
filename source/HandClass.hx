@@ -15,6 +15,10 @@ class HandClass extends FlxSprite
 
 		animation.play('rock');
 
+		#if MOBILE_BUILD
+		scale.set(6, 6);
+		#else
 		scale.set(2, 2);
+		#end
 	}
 }
