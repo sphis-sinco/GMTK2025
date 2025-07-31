@@ -19,6 +19,7 @@ class PlayState extends FlxState
 	var enemyPick:Int = 0;
 
 	var go:Bool = false;
+	var endingEventHappened:Bool = false;
 
 	public static var score:Int = 0;
 
@@ -108,39 +109,44 @@ class PlayState extends FlxState
 		}
 		else
 		{
-			switch (playerLastPick)
+			if (!endingEventHappened)
 			{
-				case 1: // rock
-					enemyPick = 2;
-					enemyHand.animation.play('paper');
-				case 2: // paper
-					enemyPick = 3;
-					enemyHand.animation.play('scissors');
-				case 3: // scissors
-					enemyHand.animation.play('rock');
-					enemyPick = 1;
+				switch (playerLastPick)
+				{
+					case 1: // rock
+						enemyPick = 2;
+						enemyHand.animation.play('paper');
+					case 2: // paper
+						enemyPick = 3;
+						enemyHand.animation.play('scissors');
+					case 3: // scissors
+						enemyHand.animation.play('rock');
+						enemyPick = 1;
+				}
+
+				playerLastPick = playerPick;
+
+				switch [playerPick, enemyPick]
+				{
+					case [1, 2], [2, 3], [3, 1]:
+						score += FlxG.random.int(100, 300);
+
+						requestedBT = 'PLAYER VICTORY!';
+					case [2, 1], [3, 2], [1, 3]:
+						// enemy wins
+						requestedBT = 'ENEMY VICTORY!';
+					case _:
+						// tie.
+						requestedBT = 'TIE!';
+				}
+
+				FlxTimer.wait(0.5, () ->
+				{
+					FlxG.switchState(() -> new PlayState());
+				});
+
+				endingEventHappened = true;
 			}
-
-			playerLastPick = playerPick;
-
-			switch [playerPick, enemyPick]
-			{
-				case [1, 2], [2, 3], [3, 1]:
-					score += FlxG.random.int(100, 300);
-
-					requestedBT = 'PLAYER VICTORY!';
-				case [2, 1], [3, 2], [1, 3]:
-					// enemy wins
-					requestedBT = 'ENEMY VICTORY!';
-				case _:
-					// tie.
-					requestedBT = 'TIE!';
-			}
-
-			FlxTimer.wait(0.5, () ->
-			{
-				FlxG.switchState(() -> new PlayState());
-			});
 		}
 	}
 }
