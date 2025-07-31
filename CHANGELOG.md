@@ -1,4 +1,5 @@
 # r3 - (7/31/2025)
+- Added Difficulty Selection State
 - Added different window titles for different compile targets
 
 # r2 - (7/31/2025)
