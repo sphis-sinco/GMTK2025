@@ -12,7 +12,7 @@ import flixel.util.FlxTimer;
 class IntroState extends FlxState
 {
 	var logo:FlxSprite = new FlxSprite(0, 0, 'assets/images/jam-logo.png');
-	var text:FlxText = new FlxText(0, 0, 0, 'HAXEJAM WINTER JAM 2024', 32);
+	var text:FlxText = new FlxText(0, 0, 0, 'GMTK 2025', 32);
 
 	private var _times:Array<Float>;
 	private var _curPart:Int = 0;
@@ -44,10 +44,10 @@ class IntroState extends FlxState
 	{
 		// Thing to skip the splash screen
 		// Comment this out if you want it unskippable
-		// if (FlxG.keys.justPressed.SPACE || FlxG.mouse.justPressed)
-		// {
-		// 	finishTween();
-		// }
+		if (FlxG.keys.justPressed.SPACE)
+		{
+			finishTween();
+		}
 
 		if (#if debug FlxG.keys.justReleased.ANY && #end!started)
 		{
@@ -57,7 +57,7 @@ class IntroState extends FlxState
 			}
 
 			// put the included flixel.mp3 into your assests folder in your project
-			FlxG.sound.play('assets/sounds/flixel.wav', 1, false, null, true);
+			FlxG.sound.play('assets/sfx/flixel.wav', 1, false, null, true);
 		}
 
 		super.update(elapsed);
@@ -116,7 +116,7 @@ class IntroState extends FlxState
 		text.visible = false;
 		FlxG.camera.fade(FlxColor.WHITE, 1, true);
 
-		logo.scale.set(0.7, 0.7);
+		logo.scale.set(0.25, 0.25);
 		logo.screenCenter();
 		add(logo);
 
