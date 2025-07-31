@@ -8,6 +8,8 @@ class PlayState extends FlxState
 	var playerHand:HandClass;
 	var enemyHand:HandClass;
 
+	var enemyPick:Int = 0;
+
 	override public function create()
 	{
 		playerHand = new HandClass();
@@ -27,6 +29,18 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		enemyPick = FlxG.random.int(1, 3);
+
+		switch (enemyPick)
+		{
+			case 1:
+				enemyHand.animation.play('rock');
+			case 2:
+				enemyHand.animation.play('paper');
+			case 3:
+				enemyHand.animation.play('scissors');
+		}
 
 		if (FlxG.mouse.overlaps(playerHand))
 		{
