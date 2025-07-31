@@ -55,7 +55,7 @@ class PlayState extends FlxState
 		burstText.y = burstText.height;
 		burstText.alpha = 0;
 		burstText.alpha = 1;
-		FlxTween.tween(burstText, {alpha: 0}, 1.0, {
+		FlxTween.tween(burstText, {alpha: 0}, 4.0, {
 			ease: FlxEase.expoOut,
 			onComplete: tween ->
 			{
