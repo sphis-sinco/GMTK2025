@@ -12,12 +12,12 @@ class PlayState extends FlxState
 	{
 		playerHand = new HandClass();
 		add(playerHand);
-		playerHand.flipX = true;
 		playerHand.screenCenter(Y);
 		playerHand.x = FlxG.width - (playerHand.width * 4);
 
 		enemyHand = new HandClass();
 		add(enemyHand);
+		enemyHand.flipX = true;
 		enemyHand.screenCenter(Y);
 		enemyHand.x = enemyHand.width * 4;
 
