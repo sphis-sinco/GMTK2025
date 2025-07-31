@@ -12,7 +12,8 @@ class Main extends Sprite
 
 		FlxG.assets.loadSound('assets/sfx/flixel.wav');
 
-		FlxG.save.bind('GMTK-2025', 'Sinco');
+		FlxG.save.mergeDataFrom('GMTK-2025', 'Sinco', true);
+		FlxG.save.bind('Ropasci', 'Sinco');
 
 		if (FlxG.save.data.isNew == true)
 			FlxG.save.data.isNew = false;

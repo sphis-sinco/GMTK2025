@@ -31,25 +31,19 @@ class PlayState extends FlxState
 
 	public static var requestedBT:String;
 
-	public static var scoreIncrease:Float;
-
 	var shootBtn:FlxSprite;
 
 	override public function create()
 	{
-		trace(Html5BS.scoreIncrease);
+		// trace(Html5BS.scoreIncrease);
 
 		#if !static
 		if (score == null)
-		{
 			score = 0;
-		}
 		#end
 
 		if (requestedBT == null)
-		{
 			requestedBT = (FlxG.save.data.isNew == true) ? 'BEGIN!\n\nTap the right hand to change your selection' : 'BEGIN!';
-		}
 
 		playerHand = new HandClass();
 		add(playerHand);
@@ -108,7 +102,6 @@ class PlayState extends FlxState
 		FlxG.watch.addQuick('FlxG.save.data', FlxG.save.data);
 
 		FlxG.watch.addQuick('score', score);
-		FlxG.watch.addQuick('scoreIncrease', scoreIncrease);
 
 		FlxG.watch.addQuick('enemyPick', enemyPick);
 		FlxG.watch.addQuick('playerPick', playerPick);
@@ -118,25 +111,6 @@ class PlayState extends FlxState
 		highscoreText.text = 'highscore: ${Std.int(FlxG.save.data.score)}';
 		scoreText.screenCenter(X);
 		highscoreText.screenCenter(X);
-
-		scoreIncrease = FlxMath.roundDecimal(scoreIncrease, 0);
-		if (Std.int(scoreIncrease) != 0 || Std.int(Html5BS.scoreIncrease) != 0)
-		{
-			if (Html5BS.scoreIncrease >= scoreIncrease)
-				scoreIncrease = Html5BS.scoreIncrease;
-
-			// TODO: fix lerping when not doing / 1
-
-			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score) / 1, 0);
-			FlxG.watch.addQuick('incAmount', incAmount);
-
-			score += incAmount;
-			if (score < 0)
-				score = 0;
-			scoreIncrease -= incAmount;
-			if (score > FlxG.save.data.score)
-				FlxG.save.data.score = score;
-		}
 
 		if (shootBtn.animation.finished || shootBtn.animation.name == 'pressed' && !FlxG.mouse.overlaps(shootBtn))
 			shootBtn.animation.play('idle');
@@ -219,11 +193,11 @@ class PlayState extends FlxState
 				{
 					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]:
 						requestedBT = 'ENEMY VICTORY!';
-						scoreIncrease -= FlxG.random.int(100, 300);
+						score -= FlxG.random.int(300, 100);
 						FlxG.sound.play('assets/sfx/Fail.wav');
 
 					case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]:
-						scoreIncrease += FlxG.random.int(100, 300);
+						score += FlxG.random.int(100, 300);
 						requestedBT = 'PLAYER VICTORY!';
 						FlxG.sound.play('assets/sfx/Victory.wav');
 
@@ -231,6 +205,11 @@ class PlayState extends FlxState
 						requestedBT = 'TIE!';
 						FlxG.sound.play('assets/sfx/Tie.wav');
 				}
+
+				if (score < 0)
+					score = 0;
+				if (score > FlxG.save.data.score)
+					FlxG.save.data.score = score;
 
 				trace('result: $requestedBT');
 				endingEventHappened = true;

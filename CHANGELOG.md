@@ -1,4 +1,6 @@
 # r2 - (7/31/2025)
+- The save data name is now "Ropasci"
+- Fixed Enemy Victory Penalty not working [#3](https://github.com/sphis-sinco/Ropasci/issues/3)
 - Fixed controls text size [#2](https://github.com/sphis-sinco/Ropasci/issues/2)
 - Added Highscore Text ([#4](https://github.com/sphis-sinco/Ropasci/issues/4))
 - Added region for changing your selection
