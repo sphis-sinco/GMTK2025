@@ -161,7 +161,7 @@ jobs:
           name: macBuild
           path: Mac.tar.gz
   buildWeb:
-    runs-on: web
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@main
