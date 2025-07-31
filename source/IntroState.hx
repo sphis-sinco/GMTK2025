@@ -32,7 +32,7 @@ class IntroState extends FlxState
 
 		text.visible = false;
 		#if debug
-		text.text = 'Press anything to start';
+		text.text = #if MOBILE_BUILD 'Tap anywhere to start...\n\nHow are you here?' #else 'Press anything to start' #end;
 		text.visible = true;
 		#end
 		text.screenCenter();
