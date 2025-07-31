@@ -122,7 +122,7 @@ class PlayState extends FlxState
 			FlxG.save.data.score = score;
 		}
 
-		if (shootBtn.animation.finished)
+		if (shootBtn.animation.finished || shootBtn.animation.name == 'pressed' && !FlxG.mouse.overlaps(shootBtn))
 			shootBtn.animation.play('idle');
 
 		if (!go)
