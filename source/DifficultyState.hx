@@ -8,12 +8,26 @@ class DifficultyState extends FlxState
 	var difficulty:DifficultyButton;
 	var diff:Int = 2;
 
+	var leftBtn:DifficultyButton = new DifficultyButton(0, 0, 4);
+	var rightBtn:DifficultyButton = new DifficultyButton(0, 0, 4);
+
 	override function create()
 	{
 		super.create();
 
 		difficulty = new DifficultyButton(0, 0, diff);
 		difficulty.screenCenter();
+
+		leftBtn.x = difficulty.x - (difficulty.width * 3.5);
+		rightBtn.x = difficulty.x + (difficulty.width * 3.5);
+
+		leftBtn.y = difficulty.y;
+		rightBtn.y = leftBtn.y;
+
+		rightBtn.flipX = true;
+
+		add(leftBtn);
+		add(rightBtn);
 		add(difficulty);
 
 		changeDifficulty();
@@ -23,12 +37,12 @@ class DifficultyState extends FlxState
 	{
 		super.update(elapsed);
 
-		if (FlxG.keys.justReleased.RIGHT)
+		if (FlxG.keys.justReleased.RIGHT || (FlxG.mouse.overlaps(rightBtn) && FlxG.mouse.justReleased))
 		{
 			changeDifficulty(1);
 		}
 
-		if (FlxG.keys.justReleased.LEFT)
+		if (FlxG.keys.justReleased.LEFT || (FlxG.mouse.overlaps(leftBtn) && FlxG.mouse.justReleased))
 		{
 			changeDifficulty(-1);
 		}
