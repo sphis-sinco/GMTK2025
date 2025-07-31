@@ -18,9 +18,9 @@ class DifficultyButton extends FlxSprite
 		switchDiff(diff);
 
 		#if MOBILE_BUILD
-		scale.set(4, 4);
+		scale.set(6, 6);
 		#else
-		scale.set(2, 2);
+		scale.set(4, 4);
 		#end
 	}
 
