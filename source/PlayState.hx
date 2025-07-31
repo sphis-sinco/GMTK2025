@@ -152,8 +152,7 @@ class PlayState extends FlxState
 					enemyHand.animation.play('scissors');
 			}
 
-			if (FlxG.mouse.overlaps(playerHand) && FlxG.mouse.justReleased #if MOBILE_BUILD
-				|| !(FlxG.mouse.x < playerHand.x + (playerHand.width * 4)) #end)
+			if ((FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > (shootBtn.x + shootBtn.width))) && FlxG.mouse.justReleased)
 			{
 				switch (playerHand.animation.name.toLowerCase())
 				{
