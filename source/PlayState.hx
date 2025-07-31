@@ -10,6 +10,8 @@ class PlayState extends FlxState
 
 	var enemyPick:Int = 0;
 
+	var go:Bool = false;
+
 	override public function create()
 	{
 		playerHand = new HandClass();
@@ -30,32 +32,39 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
-		enemyPick = FlxG.random.int(1, 3);
-
-		switch (enemyPick)
+		if (!go)
 		{
-			case 1:
-				enemyHand.animation.play('rock');
-			case 2:
-				enemyHand.animation.play('paper');
-			case 3:
-				enemyHand.animation.play('scissors');
-		}
+			enemyPick = FlxG.random.int(1, 3);
 
-		if (FlxG.mouse.overlaps(playerHand))
-		{
-			if (FlxG.mouse.justReleased)
+			switch (enemyPick)
 			{
-				switch (playerHand.animation.name.toLowerCase())
+				case 1:
+					enemyHand.animation.play('rock');
+				case 2:
+					enemyHand.animation.play('paper');
+				case 3:
+					enemyHand.animation.play('scissors');
+			}
+
+			if (FlxG.mouse.overlaps(playerHand))
+			{
+				if (FlxG.mouse.justReleased)
 				{
-					case 'rock':
-						playerHand.animation.play('paper');
-					case 'paper':
-						playerHand.animation.play('scissors');
-					default:
-						playerHand.animation.play('rock');
+					switch (playerHand.animation.name.toLowerCase())
+					{
+						case 'rock':
+							playerHand.animation.play('paper');
+						case 'paper':
+							playerHand.animation.play('scissors');
+						default:
+							playerHand.animation.play('rock');
+					}
 				}
 			}
+
+			if (FlxG.keys.justReleased.ENTER)
+				go = true;
 		}
+		else {}
 	}
 }
