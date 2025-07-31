@@ -36,6 +36,8 @@ class PlayState extends FlxState
 
 	override public function create()
 	{
+		trace(Html5BS.scoreIncrease);
+
 		#if !static
 		if (score == null)
 		{
@@ -44,9 +46,7 @@ class PlayState extends FlxState
 		if (FlxG.save.data.score != null)
 			score = FlxG.save.data.score;
 		#end
-		#if html5
-		score = Html5BS.scoreIncrease;
-		#end
+
 		if (requestedBT == null)
 		{
 			requestedBT = (FlxG.save.data.isNew == true) ? 'BEGIN!\n\nTap the right hand to change your selection' : 'BEGIN!';
@@ -199,17 +199,11 @@ class PlayState extends FlxState
 				}
 
 				if (enemyPick == Rock)
-				{
 					enemyHand.animation.play('rock');
-				}
 				if (enemyPick == Paper)
-				{
 					enemyHand.animation.play('paper');
-				}
 				if (enemyPick == Scissors)
-				{
 					enemyHand.animation.play('scissors');
-				}
 
 				playerLastPick = playerPick;
 
@@ -236,7 +230,6 @@ class PlayState extends FlxState
 
 			FlxTimer.wait(0.5, () ->
 			{
-				Html5BS.scoreIncrease = scoreIncrease;
 				FlxG.switchState(() -> new PlayState());
 			});
 		}
