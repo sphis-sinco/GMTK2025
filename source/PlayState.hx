@@ -21,7 +21,7 @@ class PlayState extends FlxState
 	var go:Bool = false;
 	var endingEventHappened:Bool = false;
 
-	public static var score:Null<Int>;
+	public static var score:Null<Float>;
 
 	var scoreText:FlxText;
 
@@ -71,7 +71,7 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
-		scoreText.text = 'score: $score';
+		scoreText.text = 'score: ${Std.int(score)}';
 		scoreText.screenCenter(X);
 
 		if (!go)
