@@ -4,6 +4,9 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxTimer;
 
 class PlayState extends FlxState
 {
@@ -21,6 +24,10 @@ class PlayState extends FlxState
 
 	var scoreText:FlxText;
 
+	var burstText:FlxText;
+
+	public static var requestedBT:String = 'BEGIN!';
+
 	override public function create()
 	{
 		playerHand = new HandClass();
@@ -37,6 +44,21 @@ class PlayState extends FlxState
 		scoreText = new FlxText(0, 0, 0, 'score: 0', 16);
 		add(scoreText);
 		scoreText.y = FlxG.height - (scoreText.height * 2);
+
+		burstText = new FlxText(0, 0, 0, requestedBT, 16);
+		burstText.y = burstText.height;
+		burstText.alpha = 0;
+		burstText.alpha = 1;
+		FlxTween.tween(burstText, {alpha: 0}, 1.0, {
+			ease: FlxEase.expoOut,
+			onComplete: tween ->
+			{
+				burstText.destroy();
+			}
+		});
+
+		burstText.screenCenter(X);
+		add(burstText);
 
 		super.create();
 	}
@@ -104,19 +126,21 @@ class PlayState extends FlxState
 			switch [playerPick, enemyPick]
 			{
 				case [1, 2], [2, 3], [3, 1]:
-					var scoreIncrease = score + FlxG.random.int(100, 300);
-					var scoreLerp = 0.0;
+					score += FlxG.random.int(100, 300);
 
-					while (scoreLerp <= 1.0)
-					{
-						score = Std.int(FlxMath.lerp(score, scoreIncrease, scoreLerp));
-						scoreLerp *= scoreLerp;
-					}
+					requestedBT = 'PLAYER VICTORY!';
 				case [2, 1], [3, 2], [1, 3]:
 					// enemy wins
+					requestedBT = 'ENEMY VICTORY!';
 				case _:
-					// no one wins...?
+					// tie.
+					requestedBT = 'TIE!';
 			}
+
+			FlxTimer.wait(0.5, () ->
+			{
+				FlxG.switchState(() -> new PlayState());
+			});
 		}
 	}
 }
