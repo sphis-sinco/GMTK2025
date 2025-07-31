@@ -88,11 +88,12 @@ class PlayState extends FlxState
 
 		FlxG.watch.addQuick('enemyPick', enemyPick);
 		FlxG.watch.addQuick('playerPick', playerPick);
+		FlxG.watch.addQuick('playerLastPick', playerLastPick);
 
 		scoreText.text = 'score: ${Std.int(score)}';
 		scoreText.screenCenter(X);
 
-		if (scoreIncrease > 0)
+		if (scoreIncrease != 0)
 		{
 			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score) / 10, 0);
 			FlxG.watch.addQuick('incAmount', incAmount);
