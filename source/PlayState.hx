@@ -8,6 +8,9 @@ class PlayState extends FlxState
 	var playerHand:HandClass;
 	var enemyHand:HandClass;
 
+	public static var playerLastPick:Int = 0;
+
+	var playerPick:Int = 0;
 	var enemyPick:Int = 0;
 
 	var go:Bool = false;
@@ -53,10 +56,13 @@ class PlayState extends FlxState
 					switch (playerHand.animation.name.toLowerCase())
 					{
 						case 'rock':
+							playerPick = 2;
 							playerHand.animation.play('paper');
 						case 'paper':
+							playerPick = 3;
 							playerHand.animation.play('scissors');
 						default:
+							playerPick = 1;
 							playerHand.animation.play('rock');
 					}
 				}
@@ -65,6 +71,19 @@ class PlayState extends FlxState
 			if (FlxG.keys.justReleased.ENTER)
 				go = true;
 		}
-		else {}
+		else
+		{
+			switch (playerLastPick)
+			{
+				case 1: // rock
+					enemyHand.animation.play('paper');
+				case 2: // paper
+					enemyHand.animation.play('scissors');
+				case 3: // scissors
+					enemyHand.animation.play('rock');
+			}
+
+			playerLastPick = playerPick;
+		}
 	}
 }
