@@ -93,9 +93,10 @@ class PlayState extends FlxState
 		scoreText.text = 'score: ${Std.int(score)}';
 		scoreText.screenCenter(X);
 
-		if (scoreIncrease != 0)
+		scoreIncrease = FlxMath.roundDecimal(scoreIncrease, 0);
+		if (Std.int(scoreIncrease) != 0)
 		{
-			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score) / 10, 0);
+			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score), 0);
 			FlxG.watch.addQuick('incAmount', incAmount);
 
 			score += incAmount;

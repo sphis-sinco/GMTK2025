@@ -51,6 +51,8 @@ class IntroState extends FlxState
 
 		if (#if debug FlxG.keys.justReleased.ANY && #end!started)
 		{
+			started = true;
+
 			for (time in _times)
 			{
 				new FlxTimer().start(time, timerCallback);
