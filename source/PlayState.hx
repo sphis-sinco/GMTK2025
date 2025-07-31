@@ -117,6 +117,9 @@ class PlayState extends FlxState
 
 		if (!go)
 		{
+			final playerHandRegion = (shootBtn.x + shootBtn.width) - (32 * 6);
+			final enemyHandRegion = (shootBtn.x - shootBtn.width) + (32 * 6);
+
 			final enemyPickInt = FlxG.random.int(1, 3);
 
 			switch (enemyPickInt)
@@ -132,8 +135,19 @@ class PlayState extends FlxState
 					enemyHand.animation.play('scissors');
 			}
 
-			if (!FlxG.mouse.overlaps(shootBtn)
-				&& (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > (shootBtn.x + shootBtn.width)))
+			if (FlxG.mouse.overlaps(shootBtn)
+				|| ((FlxG.mouse.x < enemyHandRegion && !(FlxG.mouse.x < playerHandRegion)) && !FlxG.mouse.overlaps(playerHand)))
+			{
+				if (FlxG.mouse.pressed)
+					shootBtn.animation.play('pressed');
+				if (FlxG.mouse.justReleased)
+				{
+					go = true;
+					shootBtn.animation.play('tapped');
+				}
+			}
+			else if (!FlxG.mouse.overlaps(shootBtn)
+				&& (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > playerHandRegion))
 				&& FlxG.mouse.justReleased)
 			{
 				switch (playerHand.animation.name.toLowerCase())
@@ -147,17 +161,6 @@ class PlayState extends FlxState
 					default:
 						playerPick = Rock;
 						playerHand.animation.play('rock');
-				}
-			}
-
-			if (FlxG.mouse.overlaps(shootBtn))
-			{
-				if (FlxG.mouse.pressed)
-					shootBtn.animation.play('pressed');
-				if (FlxG.mouse.justReleased)
-				{
-					go = true;
-					shootBtn.animation.play('tapped');
 				}
 			}
 
