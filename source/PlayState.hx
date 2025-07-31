@@ -29,6 +29,12 @@ class PlayState extends FlxState
 
 	public static var requestedBT:String = 'BEGIN!';
 
+	public static var scoreIncrease:Float;
+
+	var ROCK:Int = 1;
+	var PAPER:Int = 2;
+	var SCISSORS:Int = 3;
+
 	override public function create()
 	{
 		if (score == null)
@@ -74,6 +80,14 @@ class PlayState extends FlxState
 		scoreText.text = 'score: ${Std.int(score)}';
 		scoreText.screenCenter(X);
 
+		if (scoreIncrease > 0)
+		{
+			final incAmount = ((score + scoreIncrease) - score) / 10;
+
+			score += incAmount;
+			scoreIncrease -= incAmount;
+		}
+
 		if (!go)
 		{
 			enemyPick = FlxG.random.int(1, 3);
@@ -95,13 +109,13 @@ class PlayState extends FlxState
 					switch (playerHand.animation.name.toLowerCase())
 					{
 						case 'rock':
-							playerPick = 2;
+							playerPick = PAPER;
 							playerHand.animation.play('paper');
 						case 'paper':
-							playerPick = 3;
+							playerPick = SCISSORS;
 							playerHand.animation.play('scissors');
 						default:
-							playerPick = 1;
+							playerPick = ROCK;
 							playerHand.animation.play('rock');
 					}
 				}
@@ -114,42 +128,46 @@ class PlayState extends FlxState
 		{
 			if (!endingEventHappened)
 			{
-				switch (playerLastPick)
-				{
-					case 1: // rock
-						enemyPick = 2;
-						enemyHand.animation.play('paper');
-					case 2: // paper
-						enemyPick = 3;
-						enemyHand.animation.play('scissors');
-					case 3: // scissors
-						enemyHand.animation.play('rock');
-						enemyPick = 1;
-				}
+				if (playerLastPick == ROCK)
+					enemyPick = PAPER;
+				enemyHand.animation.play('paper');
+				if (playerLastPick == PAPER)
+					enemyPick = SCISSORS;
+				enemyHand.animation.play('scissors');
+				if (playerLastPick == SCISSORS)
+					enemyHand.animation.play('rock');
+				enemyPick = ROCK;
 
 				playerLastPick = playerPick;
 
-				switch [playerPick, enemyPick]
-				{
-					case [1, 2], [2, 3], [3, 1]:
-						score += FlxG.random.int(100, 300);
+				final playerAndEnemy = [playerPick, enemyPick];
+				final enemyAndPlayer = [enemyPick, playerPick];
 
-						requestedBT = 'PLAYER VICTORY!';
-					case [2, 1], [3, 2], [1, 3]:
-						// enemy wins
-						requestedBT = 'ENEMY VICTORY!';
-					case _:
-						// tie.
-						requestedBT = 'TIE!';
+				final rockPaper = [ROCK, PAPER];
+				final paperScissors = [PAPER, SCISSORS];
+				final scissorsRock = [SCISSORS, ROCK];
+
+				if (playerAndEnemy == rockPaper || playerAndEnemy == paperScissors || playerAndEnemy == scissorsRock)
+				{
+					scoreIncrease += FlxG.random.int(100, 300);
+					requestedBT = 'PLAYER VICTORY!';
 				}
-
-				FlxTimer.wait(0.5, () ->
+				else if (enemyAndPlayer == rockPaper || enemyAndPlayer == paperScissors || enemyAndPlayer == scissorsRock)
 				{
-					FlxG.switchState(() -> new PlayState());
-				});
-
-				endingEventHappened = true;
+					requestedBT = 'ENEMY VICTORY!';
+				}
+				else
+				{
+					requestedBT = 'TIE!';
+				}
 			}
+
+			FlxTimer.wait(0.5, () ->
+			{
+				FlxG.switchState(() -> new PlayState());
+			});
+
+			endingEventHappened = true;
 		}
 	}
 }
