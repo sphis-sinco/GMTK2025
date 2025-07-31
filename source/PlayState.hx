@@ -123,22 +123,19 @@ class PlayState extends FlxState
 					enemyHand.animation.play('scissors');
 			}
 
-			if (FlxG.mouse.overlaps(playerHand))
+			if (FlxG.mouse.overlaps(playerHand) && FlxG.mouse.justReleased)
 			{
-				if (FlxG.mouse.justReleased)
+				switch (playerHand.animation.name.toLowerCase())
 				{
-					switch (playerHand.animation.name.toLowerCase())
-					{
-						case 'rock':
-							playerPick = Paper;
-							playerHand.animation.play('paper');
-						case 'paper':
-							playerPick = Scissors;
-							playerHand.animation.play('scissors');
-						default:
-							playerPick = Rock;
-							playerHand.animation.play('rock');
-					}
+					case 'rock':
+						playerPick = Paper;
+						playerHand.animation.play('paper');
+					case 'paper':
+						playerPick = Scissors;
+						playerHand.animation.play('scissors');
+					default:
+						playerPick = Rock;
+						playerHand.animation.play('rock');
 				}
 			}
 
