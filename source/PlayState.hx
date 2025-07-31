@@ -166,7 +166,6 @@ class PlayState extends FlxState
 	}
 }
 
-// Define multiple enum values.
 enum Move
 {
 	Rock;
