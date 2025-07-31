@@ -29,13 +29,8 @@ class IntroState extends FlxState
 
 		// An array of functions to call after each time thing has passed, feel free to rename to whatever
 		_functions = [addText1, addText2, addText3, addText4, addText5];
-
-		text.visible = false;
-		#if !FLX_NO_DEBUG
-		text.text = #if MOBILE_BUILD 'Tap anywhere to start...\n\nHow are you here?' #else 'Press anything to start' #end;
-		text.visible = true;
-		#end
-		text.screenCenter();
+		text.visible = false; #if (debug && !html5) text.text = #if MOBILE_BUILD 'Tap anywhere to start...\n\nHow are you here?' #else 'Press anything to start' #end;
+		text.visible = true; #end text.screenCenter();
 		add(text);
 		super.create();
 	}
@@ -49,7 +44,7 @@ class IntroState extends FlxState
 			finishTween();
 		}
 
-		if (#if !FLX_NO_DEBUG FlxG.mouse.justReleased || FlxG.keys.justReleased.ANY && #end!started)
+		if (#if (debug && !html5) FlxG.mouse.justReleased || FlxG.keys.justReleased.ANY && #end!started)
 		{
 			started = true;
 
