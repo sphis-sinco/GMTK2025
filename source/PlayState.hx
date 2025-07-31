@@ -124,20 +124,25 @@ class PlayState extends FlxState
 		{
 			if (!endingEventHappened)
 			{
-				if (playerLastPick == Rock)
+				final followPlayer = FlxG.random.bool(FlxG.random.int(0, 100));
+
+				if (followPlayer)
 				{
-					enemyPick = Paper;
-					enemyHand.animation.play('paper');
-				}
-				if (playerLastPick == Paper)
-				{
-					enemyPick = Scissors;
-					enemyHand.animation.play('scissors');
-				}
-				if (playerLastPick == Scissors)
-				{
-					enemyHand.animation.play('rock');
-					enemyPick = Rock;
+					if (playerLastPick == Rock)
+					{
+						enemyPick = Paper;
+						enemyHand.animation.play('paper');
+					}
+					if (playerLastPick == Paper)
+					{
+						enemyPick = Scissors;
+						enemyHand.animation.play('scissors');
+					}
+					if (playerLastPick == Scissors)
+					{
+						enemyHand.animation.play('rock');
+						enemyPick = Rock;
+					}
 				}
 
 				playerLastPick = playerPick;
