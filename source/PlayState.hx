@@ -34,7 +34,11 @@ class PlayState extends FlxState
 	override public function create()
 	{
 		if (score == null)
+		{
 			score = 0;
+			if (FlxG.save.data.score != null)
+				scoreIncrease = FlxG.save.data.score;
+		}
 		if (requestedBT == null)
 		{
 			requestedBT = (FlxG.save.data.isNew == true) ? 'BEGIN!\n\nTap the right hand to change your selection' : 'BEGIN!';
@@ -87,6 +91,8 @@ class PlayState extends FlxState
 			score += incAmount;
 			scoreIncrease -= incAmount;
 		}
+
+		FlxG.save.data.score = score;
 
 		if (!go)
 		{
