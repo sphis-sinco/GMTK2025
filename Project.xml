@@ -25,7 +25,8 @@
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
 
 	<!--Mobile-specific-->
-	<window if="mobile || MOBILE_TESTING" orientation="landscape" fullscreen="true" width="0" height="0" />
+	<define name="MOBILE_BUILD" if="mobile || MOBILE_TESTING"/>
+	<window if="MOBILE_BUILD" orientation="landscape" fullscreen="true" width="0" height="0" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -73,8 +74,8 @@
 	<!--<haxedef name="FLX_NO_NATIVE_CURSOR" />-->
 
 	<!--Optimise inputs, be careful you will get null errors if you don't use conditionals in your game-->
-	<haxedef name="FLX_NO_MOUSE" if="mobile" />
-	<haxedef name="FLX_NO_KEYBOARD" if="mobile" />
+	<haxedef name="FLX_NO_MOUSE" if="MOBILE_BUILD" />
+	<haxedef name="FLX_NO_KEYBOARD" if="MOBILE_BUILD" />
 	<haxedef name="FLX_NO_TOUCH" if="desktop" />
 	<!--<haxedef name="FLX_NO_GAMEPAD" />-->
 
