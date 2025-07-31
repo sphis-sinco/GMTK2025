@@ -21,7 +21,7 @@ class PlayState extends FlxState
 	var go:Bool = false;
 	var endingEventHappened:Bool = false;
 
-	public static var score:Int = 0;
+	public static var score:Null<Int>;
 
 	var scoreText:FlxText;
 
@@ -31,6 +31,9 @@ class PlayState extends FlxState
 
 	override public function create()
 	{
+		if (score == null)
+			score = 0;
+
 		playerHand = new HandClass();
 		add(playerHand);
 		playerHand.screenCenter(Y);
