@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -30,6 +31,8 @@ class PlayState extends FlxState
 	public static var requestedBT:String;
 
 	public static var scoreIncrease:Float;
+
+	var shootBtn:FlxSprite;
 
 	override public function create()
 	{
@@ -74,6 +77,19 @@ class PlayState extends FlxState
 		burstText.screenCenter(X);
 		add(burstText);
 
+		shootBtn = new FlxSprite().loadGraphic('assets/images/shootBtn.png', true, 64, 64);
+		shootBtn.animation.add('idle', [0]);
+		shootBtn.animation.add('pressed', [1]);
+		shootBtn.animation.add('tapped', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1], 15, false);
+		shootBtn.animation.play('idle');
+		add(shootBtn);
+		#if MOBILE_BUILD
+		shootBtn.scale.set(6, 6);
+		#else
+		shootBtn.scale.set(2, 2);
+		#end
+		shootBtn.screenCenter();
+
 		super.create();
 	}
 
@@ -106,6 +122,9 @@ class PlayState extends FlxState
 			FlxG.save.data.score = score;
 		}
 
+		if (shootBtn.animation.finished)
+			shootBtn.animation.play('idle');
+
 		if (!go)
 		{
 			final enemyPickInt = FlxG.random.int(1, 3);
@@ -136,6 +155,17 @@ class PlayState extends FlxState
 					default:
 						playerPick = Rock;
 						playerHand.animation.play('rock');
+				}
+			}
+
+			if (FlxG.mouse.overlaps(shootBtn))
+			{
+				if (FlxG.mouse.pressed)
+					shootBtn.animation.play('pressed');
+				if (FlxG.mouse.justReleased)
+				{
+					go = true;
+					shootBtn.animation.play('tapped');
 				}
 			}
 
