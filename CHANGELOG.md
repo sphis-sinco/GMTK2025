@@ -1,5 +1,6 @@
 # r3 - (7/31/2025)
-- Added Difficulty Selection State
+- Added escape button to gameplay that sends you back to the difficulty selection state
+- Added Difficulty Selection State - new starting state
 - Added different window titles for different compile targets
 
 # r2 - (7/31/2025)

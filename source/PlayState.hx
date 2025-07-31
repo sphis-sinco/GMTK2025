@@ -166,6 +166,8 @@ class PlayState extends FlxState
 
 			if (FlxG.keys.justReleased.ENTER)
 				go = true;
+			else if (FlxG.keys.justReleased.ESCAPE)
+				FlxG.switchState(() -> new DifficultyState());
 		}
 		else
 		{
