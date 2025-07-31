@@ -2,6 +2,8 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
+import flixel.math.FlxMath;
+import flixel.text.FlxText;
 
 class PlayState extends FlxState
 {
@@ -14,6 +16,10 @@ class PlayState extends FlxState
 	var enemyPick:Int = 0;
 
 	var go:Bool = false;
+
+	public static var score:Int = 0;
+
+	var scoreText:FlxText;
 
 	override public function create()
 	{
@@ -28,12 +34,19 @@ class PlayState extends FlxState
 		enemyHand.screenCenter(Y);
 		enemyHand.x = enemyHand.width * 4;
 
+		scoreText = new FlxText(0, 0, 0, 'score: 0', 16);
+		add(scoreText);
+		scoreText.y = FlxG.height - (scoreText.height * 2);
+
 		super.create();
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		scoreText.text = 'score: $score';
+		scoreText.screenCenter(X);
 
 		if (!go)
 		{
@@ -91,7 +104,14 @@ class PlayState extends FlxState
 			switch [playerPick, enemyPick]
 			{
 				case [1, 2], [2, 3], [3, 1]:
-					// player wins
+					var scoreIncrease = score + FlxG.random.int(100, 300);
+					var scoreLerp = 0.0;
+
+					while (scoreLerp <= 1.0)
+					{
+						score = Std.int(FlxMath.lerp(score, scoreIncrease, scoreLerp));
+						scoreLerp *= scoreLerp;
+					}
 				case [2, 1], [3, 2], [1, 3]:
 					// enemy wins
 				case _:
