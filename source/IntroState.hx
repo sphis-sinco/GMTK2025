@@ -31,7 +31,7 @@ class IntroState extends FlxState
 		_functions = [addText1, addText2, addText3, addText4, addText5];
 
 		text.visible = false;
-		#if debug
+		#if !FLX_NO_DEBUG
 		text.text = #if MOBILE_BUILD 'Tap anywhere to start...\n\nHow are you here?' #else 'Press anything to start' #end;
 		text.visible = true;
 		#end
@@ -49,7 +49,7 @@ class IntroState extends FlxState
 			finishTween();
 		}
 
-		if (#if debug FlxG.mouse.justReleased || FlxG.keys.justReleased.ANY && #end!started)
+		if (#if !FLX_NO_DEBUG FlxG.mouse.justReleased || FlxG.keys.justReleased.ANY && #end!started)
 		{
 			started = true;
 
