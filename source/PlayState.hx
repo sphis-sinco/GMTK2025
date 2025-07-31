@@ -76,14 +76,27 @@ class PlayState extends FlxState
 			switch (playerLastPick)
 			{
 				case 1: // rock
+					enemyPick = 2;
 					enemyHand.animation.play('paper');
 				case 2: // paper
+					enemyPick = 3;
 					enemyHand.animation.play('scissors');
 				case 3: // scissors
 					enemyHand.animation.play('rock');
+					enemyPick = 1;
 			}
 
 			playerLastPick = playerPick;
+
+			switch [playerPick, enemyPick]
+			{
+				case [1, 2], [2, 3], [3, 1]:
+					// player wins
+				case [2, 1], [3, 2], [1, 3]:
+					// enemy wins
+				case _:
+					// no one wins...?
+			}
 		}
 	}
 }
