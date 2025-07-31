@@ -49,7 +49,7 @@ class IntroState extends FlxState
 			finishTween();
 		}
 
-		if (#if debug FlxG.keys.justReleased.ANY && #end!started)
+		if (#if debug FlxG.mouse.justReleased || FlxG.keys.justReleased.ANY && #end!started)
 		{
 			started = true;
 
