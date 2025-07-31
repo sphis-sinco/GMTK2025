@@ -161,7 +161,7 @@ class PlayState extends FlxState
 					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]:
 						requestedBT = 'ENEMY VICTORY!';
 						scoreIncrease -= FlxG.random.int(100, 300);
-						if (score - scoreIncrease < 0)
+						if (score + scoreIncrease < 0)
 							scoreIncrease += (score - scoreIncrease);
 						FlxG.sound.play('assets/sfx/Fail.wav');
 
