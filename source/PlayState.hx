@@ -110,8 +110,11 @@ class PlayState extends FlxState
 		scoreText.screenCenter(X);
 
 		scoreIncrease = FlxMath.roundDecimal(scoreIncrease, 0);
-		if (Std.int(scoreIncrease) != 0)
+		if (Std.int(scoreIncrease) != 0 || Std.int(Html5BS.scoreIncrease) != 0)
 		{
+			if (Html5BS.scoreIncrease >= scoreIncrease)
+				scoreIncrease = Html5BS.scoreIncrease;
+
 			// TODO: fix lerping when not doing / 1
 
 			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score) / 1, 0);
@@ -226,12 +229,10 @@ class PlayState extends FlxState
 				endingEventHappened = true;
 			}
 
-			FlxTimer.wait(0.5, () -> {
-				#if html5
-				go = false;
-				#else
+			FlxTimer.wait(0.5, () ->
+			{
+				Html5BS.scoreIncrease = scoreIncrease;
 				FlxG.switchState(() -> new PlayState());
-				#end
 			});
 		}
 	}
