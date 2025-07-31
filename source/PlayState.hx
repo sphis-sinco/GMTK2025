@@ -147,12 +147,10 @@ class PlayState extends FlxState
 
 				playerLastPick = playerPick;
 
-				var result = '';
-
 				switch [playerPick, enemyPick]
 				{
 					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]:
-						result = 'ENEMY VICTORY!';
+						requestedBT = 'ENEMY VICTORY!';
 						scoreIncrease -= FlxG.random.int(100, 300);
 						if (score - scoreIncrease < 0)
 							scoreIncrease += (score - scoreIncrease);
@@ -160,15 +158,15 @@ class PlayState extends FlxState
 
 					case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]:
 						scoreIncrease += FlxG.random.int(100, 300);
-						result = 'PLAYER VICTORY!';
+						requestedBT = 'PLAYER VICTORY!';
 						FlxG.sound.play('assets/sfx/Victory.wav');
 
 					case _:
-						result = 'TIE!';
+						requestedBT = 'TIE!';
 						FlxG.sound.play('assets/sfx/Tie.wav');
 				}
 
-				trace('result: $result');
+				trace('result: $requestedBT');
 				endingEventHappened = true;
 			}
 

@@ -106,7 +106,7 @@ class IntroState extends FlxState
 	private function addText4():Void
 	{
 		// stuff that happens
-		text.text += ' Fucking';
+		text.text += ' F**cking';
 		text.screenCenter();
 	}
 
@@ -116,7 +116,7 @@ class IntroState extends FlxState
 		text.visible = false;
 		FlxG.camera.fade(FlxColor.WHITE, 1, true);
 
-		logo.scale.set(0.25, 0.25);
+		logo.scale.set(1 / 8, 1 / 8);
 		logo.screenCenter();
 		add(logo);
 
