@@ -10,6 +10,8 @@ class Main extends Sprite
 	{
 		super();
 
+		FlxG.assets.loadSound('assets/sfx/flixel.wav');
+
 		FlxG.save.bind('GMTK-2025', 'Sinco');
 
 		if (FlxG.save.data.isNew == true)
