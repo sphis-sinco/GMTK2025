@@ -27,7 +27,7 @@ class PlayState extends FlxState
 
 	var burstText:FlxText;
 
-	public static var requestedBT:String = 'BEGIN!';
+	public static var requestedBT:String;
 
 	public static var scoreIncrease:Float;
 
@@ -35,6 +35,10 @@ class PlayState extends FlxState
 	{
 		if (score == null)
 			score = 0;
+		if (requestedBT == null)
+		{
+			requestedBT = (FlxG.save.data.isNew == true) ? 'BEGIN!\n\nTap the right hand to change your selection' : 'BEGIN!';
+		}
 
 		playerHand = new HandClass();
 		add(playerHand);
@@ -55,7 +59,7 @@ class PlayState extends FlxState
 		burstText.y = burstText.height;
 		burstText.alpha = 0;
 		burstText.alpha = 1;
-		FlxTween.tween(burstText, {alpha: 0}, 4.0, {
+		FlxTween.tween(burstText, {alpha: 0}, (FlxG.save.data.isNew == true) ? 16.0 : 4.0, {
 			ease: FlxEase.expoOut,
 			onComplete: tween ->
 			{
