@@ -22,7 +22,7 @@ class PlayState extends FlxState
 	var go:Bool = false;
 	var endingEventHappened:Bool = false;
 
-	public static var score:Null<Float>;
+	public static var score:Float;
 
 	var scoreText:FlxText;
 
@@ -36,12 +36,17 @@ class PlayState extends FlxState
 
 	override public function create()
 	{
+		#if !static
 		if (score == null)
 		{
 			score = 0;
-			if (FlxG.save.data.score != null)
-				score = FlxG.save.data.score;
 		}
+		if (FlxG.save.data.score != null)
+			score = FlxG.save.data.score;
+		#end
+		#if html5
+		score = Html5BS.scoreIncrease;
+		#end
 		if (requestedBT == null)
 		{
 			requestedBT = (FlxG.save.data.isNew == true) ? 'BEGIN!\n\nTap the right hand to change your selection' : 'BEGIN!';
