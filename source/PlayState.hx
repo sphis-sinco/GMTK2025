@@ -118,6 +118,8 @@ class PlayState extends FlxState
 			FlxG.watch.addQuick('incAmount', incAmount);
 
 			score += incAmount;
+			if (score < 0)
+				score = 0;
 			scoreIncrease -= incAmount;
 			FlxG.save.data.score = score;
 		}
@@ -208,8 +210,6 @@ class PlayState extends FlxState
 					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]:
 						requestedBT = 'ENEMY VICTORY!';
 						scoreIncrease -= FlxG.random.int(100, 300);
-						if (score + scoreIncrease < 0)
-							scoreIncrease += (score - scoreIncrease);
 						FlxG.sound.play('assets/sfx/Fail.wav');
 
 					case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]:
