@@ -147,6 +147,14 @@ class PlayState extends FlxState
 				final paperScissors = [PAPER, SCISSORS];
 				final scissorsRock = [SCISSORS, ROCK];
 
+				trace(playerAndEnemy == rockPaper);
+				trace(playerAndEnemy == paperScissors);
+				trace(playerAndEnemy == scissorsRock);
+
+				trace(enemyAndPlayer == rockPaper);
+				trace(enemyAndPlayer == paperScissors);
+				trace(enemyAndPlayer == scissorsRock);
+
 				if (playerAndEnemy == rockPaper || playerAndEnemy == paperScissors || playerAndEnemy == scissorsRock)
 				{
 					scoreIncrease += FlxG.random.int(100, 300);
