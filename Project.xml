@@ -102,4 +102,5 @@
 	<!-- _________________________________ Custom _______________________________ -->
 
 	<!--Place custom nodes like icons here-->
+	<icon path="assets/images/appIcon.png" />
 </project>
