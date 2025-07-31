@@ -58,11 +58,11 @@ class PlayState extends FlxState
 		enemyHand.screenCenter(Y);
 		enemyHand.x = enemyHand.width * 4;
 
-		scoreText = new FlxText(0, 0, 0, 'score: 0', 16);
+		scoreText = new FlxText(0, 0, 0, 'score: 0', #if MOBILE_BUILD 64 #else 16 #end);
 		add(scoreText);
 		scoreText.y = FlxG.height - (scoreText.height * 2);
 
-		burstText = new FlxText(0, 0, 0, requestedBT, 16);
+		burstText = new FlxText(0, 0, 0, requestedBT, #if MOBILE_BUILD 64 #else 16 #end);
 		burstText.y = burstText.height;
 		burstText.alpha = 0;
 		burstText.alpha = 1;
