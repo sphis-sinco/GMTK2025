@@ -92,21 +92,21 @@ class IntroState extends FlxState
 	{
 		// stuff that happens
 		text.visible = true;
-		text.text = 'It\'s';
+		text.text = 'Made';
 		text.screenCenter();
 	}
 
 	private function addText3():Void
 	{
 		// stuff that happens
-		text.text += ' The';
+		text.text += ' For';
 		text.screenCenter();
 	}
 
 	private function addText4():Void
 	{
 		// stuff that happens
-		text.text += ' F**cking';
+		text.text += ' The';
 		text.screenCenter();
 	}
 
