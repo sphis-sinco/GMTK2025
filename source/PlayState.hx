@@ -222,6 +222,11 @@ class PlayState extends FlxState
 						FlxG.sound.play('assets/sfx/Tie.wav');
 				}
 
+				#if html5
+				score += scoreIncrease;
+				scoreIncrease = 0;
+				#end
+
 				trace('result: $requestedBT');
 				endingEventHappened = true;
 			}
