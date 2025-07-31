@@ -81,6 +81,14 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
+		FlxG.watch.addQuick('FlxG.save.data', FlxG.save.data);
+
+		FlxG.watch.addQuick('score', score);
+		FlxG.watch.addQuick('scoreIncrease', scoreIncrease);
+
+		FlxG.watch.addQuick('enemyPick', enemyPick);
+		FlxG.watch.addQuick('playerPick', playerPick);
+
 		scoreText.text = 'score: ${Std.int(score)}';
 		scoreText.screenCenter(X);
 
@@ -100,10 +108,13 @@ class PlayState extends FlxState
 			switch (enemyPickInt)
 			{
 				case 1:
+					enemyPick = Rock;
 					enemyHand.animation.play('rock');
 				case 2:
+					enemyPick = Paper;
 					enemyHand.animation.play('paper');
 				case 3:
+					enemyPick = Scissors;
 					enemyHand.animation.play('scissors');
 			}
 
@@ -138,20 +149,24 @@ class PlayState extends FlxState
 				if (followPlayer)
 				{
 					if (playerLastPick == Rock)
-					{
 						enemyPick = Paper;
-						enemyHand.animation.play('paper');
-					}
 					if (playerLastPick == Paper)
-					{
 						enemyPick = Scissors;
-						enemyHand.animation.play('scissors');
-					}
 					if (playerLastPick == Scissors)
-					{
-						enemyHand.animation.play('rock');
 						enemyPick = Rock;
-					}
+				}
+
+				if (enemyPick == Rock)
+				{
+					enemyHand.animation.play('rock');
+				}
+				if (enemyPick == Paper)
+				{
+					enemyHand.animation.play('paper');
+				}
+				if (enemyPick == Scissors)
+				{
+					enemyHand.animation.play('scissors');
 				}
 
 				playerLastPick = playerPick;
