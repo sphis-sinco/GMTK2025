@@ -6,13 +6,20 @@ import flixel.FlxState;
 class PlayState extends FlxState
 {
 	var playerHand:HandClass;
+	var enemyHand:HandClass;
 
 	override public function create()
 	{
 		playerHand = new HandClass();
 		add(playerHand);
+		playerHand.flipX = true;
 		playerHand.screenCenter(Y);
 		playerHand.x = FlxG.width - (playerHand.width * 4);
+
+		enemyHand = new HandClass();
+		add(enemyHand);
+		enemyHand.screenCenter(Y);
+		enemyHand.x = enemyHand.width * 4;
 
 		super.create();
 	}

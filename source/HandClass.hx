@@ -12,5 +12,7 @@ class HandClass extends FlxSprite
 		animation.add('rock', [1]);
 		animation.add('paper', [3]);
 		animation.add('scissors', [2]);
+
+		animation.play('rock');
 	}
 }
