@@ -6,7 +6,8 @@ import flixel.FlxState;
 class DifficultyState extends FlxState
 {
 	var difficulty:DifficultyButton;
-	var diff:Int = 2;
+
+	public static var diff:Int = 2;
 
 	var leftBtn:DifficultyButton = new DifficultyButton(0, 0, 4);
 	var rightBtn:DifficultyButton = new DifficultyButton(0, 0, 4);
@@ -45,6 +46,11 @@ class DifficultyState extends FlxState
 		if (FlxG.keys.justReleased.LEFT || (FlxG.mouse.overlaps(leftBtn) && FlxG.mouse.justReleased))
 		{
 			changeDifficulty(-1);
+		}
+
+		if (FlxG.keys.justReleased.ENTER || (FlxG.mouse.overlaps(difficulty) && FlxG.mouse.justReleased))
+		{
+			FlxG.switchState(() -> new PlayState());
 		}
 	}
 
