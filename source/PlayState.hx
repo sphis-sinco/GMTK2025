@@ -96,7 +96,9 @@ class PlayState extends FlxState
 		scoreIncrease = FlxMath.roundDecimal(scoreIncrease, 0);
 		if (Std.int(scoreIncrease) != 0)
 		{
-			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score), 0);
+			// TODO: fix lerping when not doing / 1
+
+			final incAmount = FlxMath.roundDecimal(((score + scoreIncrease) - score) / 1, 0);
 			FlxG.watch.addQuick('incAmount', incAmount);
 
 			score += incAmount;
