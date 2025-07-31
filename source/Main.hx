@@ -20,6 +20,6 @@ class Main extends Sprite
 			FlxG.save.data.isNew = true;
 
 		trace(FlxG.save.data);
-		addChild(new FlxGame(0, 0, IntroState));
+		addChild(new FlxGame(0, 0, IntroState, 60, 60, true));
 	}
 }
