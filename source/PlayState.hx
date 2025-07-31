@@ -27,5 +27,21 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if (FlxG.mouse.overlaps(playerHand))
+		{
+			if (FlxG.mouse.justReleased)
+			{
+				switch (playerHand.animation.name.toLowerCase())
+				{
+					case 'rock':
+						playerHand.animation.play('paper');
+					case 'paper':
+						playerHand.animation.play('scissors');
+					default:
+						playerHand.animation.play('rock');
+				}
+			}
+		}
 	}
 }
