@@ -19,6 +19,9 @@ class Main extends Sprite
 		if (FlxG.save.data.isNew == null)
 			FlxG.save.data.isNew = true;
 
+		if (FlxG.save.data.score == null)
+			FlxG.save.data.score = 0.0;
+
 		trace(FlxG.save.data);
 		addChild(new FlxGame(0, 0, IntroState, 60, 60, true));
 	}

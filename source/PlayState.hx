@@ -25,6 +25,7 @@ class PlayState extends FlxState
 	public static var score:Float;
 
 	var scoreText:FlxText;
+	var highscoreText:FlxText;
 
 	var burstText:FlxText;
 
@@ -43,8 +44,6 @@ class PlayState extends FlxState
 		{
 			score = 0;
 		}
-		if (FlxG.save.data.score != null)
-			score = FlxG.save.data.score;
 		#end
 
 		if (requestedBT == null)
@@ -66,6 +65,10 @@ class PlayState extends FlxState
 		scoreText = new FlxText(0, 0, 0, 'score: 0', #if MOBILE_BUILD 64 #else 16 #end);
 		add(scoreText);
 		scoreText.y = FlxG.height - (scoreText.height * 2);
+
+		highscoreText = new FlxText(0, 0, 0, 'highscore: 0', scoreText.size);
+		add(highscoreText);
+		highscoreText.y = scoreText.y + scoreText.height;
 
 		burstText = new FlxText(0, 0, 0, requestedBT, #if MOBILE_BUILD (FlxG.save.data.isNew == true) ? 32 : 64 #else 16 #end);
 		burstText.y = burstText.height;
@@ -112,7 +115,9 @@ class PlayState extends FlxState
 		FlxG.watch.addQuick('playerLastPick', playerLastPick);
 
 		scoreText.text = 'score: ${Std.int(score)}';
+		highscoreText.text = 'highscore: ${Std.int(FlxG.save.data.score)}';
 		scoreText.screenCenter(X);
+		highscoreText.screenCenter(X);
 
 		scoreIncrease = FlxMath.roundDecimal(scoreIncrease, 0);
 		if (Std.int(scoreIncrease) != 0 || Std.int(Html5BS.scoreIncrease) != 0)
@@ -129,7 +134,8 @@ class PlayState extends FlxState
 			if (score < 0)
 				score = 0;
 			scoreIncrease -= incAmount;
-			FlxG.save.data.score = score;
+			if (score > FlxG.save.data.score)
+				FlxG.save.data.score = score;
 		}
 
 		if (shootBtn.animation.finished || shootBtn.animation.name == 'pressed' && !FlxG.mouse.overlaps(shootBtn))
