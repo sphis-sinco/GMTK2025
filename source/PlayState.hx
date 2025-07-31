@@ -67,7 +67,7 @@ class PlayState extends FlxState
 		add(scoreText);
 		scoreText.y = FlxG.height - (scoreText.height * 2);
 
-		burstText = new FlxText(0, 0, 0, requestedBT, #if MOBILE_BUILD 64 #else 16 #end);
+		burstText = new FlxText(0, 0, 0, requestedBT, #if MOBILE_BUILD (FlxG.save.data.isNew == true) ? 32 : 64 #else 16 #end);
 		burstText.y = burstText.height;
 		burstText.alpha = 0;
 		burstText.alpha = 1;
@@ -152,7 +152,8 @@ class PlayState extends FlxState
 					enemyHand.animation.play('scissors');
 			}
 
-			if (FlxG.mouse.overlaps(playerHand) && FlxG.mouse.justReleased)
+			if (FlxG.mouse.overlaps(playerHand) && FlxG.mouse.justReleased #if MOBILE_BUILD
+				|| !(FlxG.mouse.x < playerHand.x + (playerHand.width * 4)) #end)
 			{
 				switch (playerHand.animation.name.toLowerCase())
 				{
