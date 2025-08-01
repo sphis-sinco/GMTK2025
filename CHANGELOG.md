@@ -1,3 +1,7 @@
+# unknown release
+- Changed directory of audio files
+- Added Caching state
+
 # r4 - (7/31/2025)
 - Added packageName
 - Fixed Hint text positioning properly ([#6](https://github.com/sphis-sinco/Ropasci/issues/6))

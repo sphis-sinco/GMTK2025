@@ -12,10 +12,8 @@ class Main extends Sprite
 	{
 		super();
 
-		FlxG.assets.loadSound('assets/sfx/flixel.wav');
-
 		SaveManager.bind();
 
-		addChild(new FlxGame(0, 0, IntroState, 60, 60, true));
+		addChild(new FlxGame(0, 0, #if sys Caching #else IntroState #end, 60, 60, true));
 	}
 }

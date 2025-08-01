@@ -303,16 +303,16 @@ class PlayState extends FlxState
 					case [Rock, Paper] | [Paper, Scissors] | [Scissors, Rock]:
 						requestedBT = 'ENEMY VICTORY!';
 						score -= FlxG.random.int(300, 100);
-						FlxG.sound.play('assets/sfx/Fail.wav');
+						FlxG.sound.play('assets/audio/Fail.wav');
 
 					case [Rock, Scissors] | [Paper, Rock] | [Scissors, Paper]:
 						score += FlxG.random.int(100, 300);
 						requestedBT = 'PLAYER VICTORY!';
-						FlxG.sound.play('assets/sfx/Victory.wav');
+						FlxG.sound.play('assets/audio/Victory.wav');
 
 					case _:
 						requestedBT = 'TIE!';
-						FlxG.sound.play('assets/sfx/Tie.wav');
+						FlxG.sound.play('assets/audio/Tie.wav');
 				}
 
 				if (score < 0)

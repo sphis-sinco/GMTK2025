@@ -57,7 +57,7 @@ class IntroState extends FlxState
 			}
 
 			// put the included flixel.mp3 into your assests folder in your project
-			FlxG.sound.play('assets/sfx/flixel.wav', 1, false, null, true);
+			FlxG.sound.play('assets/audio/flixel.wav', 1, false, null, true);
 		}
 
 		super.update(elapsed);
