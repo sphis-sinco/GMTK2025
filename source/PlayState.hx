@@ -142,12 +142,14 @@ class PlayState extends FlxState
 					&& !FlxG.mouse.overlaps(playerHand)))
 			{
 				FlxG.watch.addQuick('Region', 'Back Button');
-				if (FlxG.mouse.pressed)
-					backBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
 				{
 					FlxG.switchState(() -> new DifficultyState());
 					backBtn.animation.play('tapped');
+				}
+				else
+				{
+					backBtn.animation.play('pressed');
 				}
 			}
 			else if (FlxG.mouse.overlaps(shootBtn)
@@ -157,12 +159,14 @@ class PlayState extends FlxState
 					&& !FlxG.mouse.overlaps(playerHand)))
 			{
 				FlxG.watch.addQuick('Region', 'Shoot Button');
-				if (FlxG.mouse.pressed)
-					shootBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
 				{
 					go = true;
 					shootBtn.animation.play('tapped');
+				}
+				else
+				{
+					shootBtn.animation.play('pressed');
 				}
 			}
 			else if (!FlxG.mouse.overlaps(shootBtn) && (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > playerHandRegion)))

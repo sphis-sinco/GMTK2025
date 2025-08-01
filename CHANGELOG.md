@@ -1,4 +1,5 @@
 # r3 - (7/31/2025)
+- Changed shoot button (and escape button) to easily display if you're in their region
 - Added Difficulties
 - Fixed Hint text positioning [#6](https://github.com/sphis-sinco/Ropasci/issues/6)
 - Added escape button to gameplay that sends you back to the difficulty selection state
