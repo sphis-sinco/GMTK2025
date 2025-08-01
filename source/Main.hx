@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxGame;
+import lime.app.Application;
 import openfl.display.Sprite;
 
 class Main extends Sprite
@@ -24,6 +25,11 @@ class Main extends Sprite
 			FlxG.save.data.score = 0.0;
 
 		trace(FlxG.save.data);
+
+		Application.current.onExit.add(function(exitCode)
+		{
+			FlxG.save.flush();
+		}, false, 100);
 		addChild(new FlxGame(0, 0, IntroState, 60, 60, true));
 	}
 }
