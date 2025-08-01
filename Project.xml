@@ -6,7 +6,7 @@
 
 	<define name="MOBILE_BUILD" if="mobile || MOBILE_TESTING"/>
 
-	<app file="Ropasci" main="Main" version="4" company="Sinco"/>
+	<app file="Ropasci" main="Main" version="4" company="Sinco" packageName="com.sinco.ropasci" package="com.sinco.ropasci"/>
 	
 	<app title="Ropasci (Desktop)" if="desktop" />
 	<app title="Ropasci (Mobile)" if="MOBILE_BUILD" />
