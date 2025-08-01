@@ -1,3 +1,6 @@
+# r4 - (7/31/2025)
+- The save is saved to disk on the application exit
+
 # r3 - (7/31/2025)
 - Added new Enemy AI features for the Hard difficulty
 - Added selected "animations" to the hands
