@@ -16,7 +16,8 @@ class PlayState extends FlxState
 	var playerHand:HandClass;
 	var enemyHand:HandClass;
 
-	public static var playerLastPick:Move = Rock;
+	public static var playerLastPick:Move = null;
+	public static var enemyLastPick:Move = null;
 
 	var playerPick:Move = Rock;
 	var enemyPick:Move = Rock;
@@ -103,6 +104,7 @@ class PlayState extends FlxState
 		FlxG.watch.addQuick('score', score);
 
 		FlxG.watch.addQuick('enemyPick', enemyPick);
+		FlxG.watch.addQuick('enemyLastPick', enemyLastPick);
 		FlxG.watch.addQuick('playerPick', playerPick);
 		FlxG.watch.addQuick('playerLastPick', playerLastPick);
 
@@ -237,14 +239,53 @@ class PlayState extends FlxState
 
 				final followPlayer = FlxG.random.bool(FlxG.random.int(fp_min, fp_max));
 
-				if (followPlayer)
+				if (followPlayer && playerLastPick != null)
 				{
-					if (playerLastPick == Rock)
-						enemyPick = Paper;
-					if (playerLastPick == Paper)
-						enemyPick = Scissors;
-					if (playerLastPick == Scissors)
-						enemyPick = Rock;
+					switch (playerLastPick)
+					{
+						case Rock:
+							enemyPick = Paper;
+						case Paper:
+							enemyPick = Scissors;
+						case Scissors:
+							enemyPick = Rock;
+					}
+					if (DifficultyState.diff == 3)
+					{
+						if (enemyLastPick == null)
+							return;
+
+						switch (playerLastPick)
+						{
+							case Rock:
+								if (enemyLastPick == Paper)
+									enemyPick = Rock;
+							case Paper:
+								if (enemyLastPick == Scissors)
+									enemyPick = Paper;
+							case Scissors:
+								if (enemyLastPick == Rock)
+									enemyPick = Scissors;
+						}
+					}
+				}
+				else
+				{
+					if (FlxG.random.bool(1 / 2.5))
+						return;
+
+					if (DifficultyState.diff == 3)
+					{
+						switch (playerPick)
+						{
+							case Rock:
+								enemyPick = Paper;
+							case Paper:
+								enemyPick = Scissors;
+							case Scissors:
+								enemyPick = Rock;
+						}
+					}
 				}
 
 				if (enemyPick == Rock)
@@ -254,6 +295,7 @@ class PlayState extends FlxState
 				if (enemyPick == Scissors)
 					enemyHand.animation.play('scissors');
 
+				enemyLastPick = enemyPick;
 				playerLastPick = playerPick;
 
 				switch [playerPick, enemyPick]
