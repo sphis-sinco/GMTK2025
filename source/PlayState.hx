@@ -86,6 +86,9 @@ class PlayState extends FlxState
 		backBtn = new GameplayButton('backBtn');
 		add(backBtn);
 
+		shootBtn.y -= shootBtn.height * 2;
+		backBtn.y += backBtn.height * 2;
+
 		super.create();
 	}
 
