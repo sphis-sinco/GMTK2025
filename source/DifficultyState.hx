@@ -19,8 +19,8 @@ class DifficultyState extends FlxState
 		difficulty = new DifficultyButton(0, 0, diff);
 		difficulty.screenCenter();
 
-		leftBtn.x = difficulty.x - (difficulty.width * #if MOBILE_BUILD 3 + #end 3.5);
-		rightBtn.x = difficulty.x + (difficulty.width * #if MOBILE_BUILD 3 + #end 3.5);
+		leftBtn.x = difficulty.x - (difficulty.width * (#if MOBILE_BUILD 3 + #end 3.5));
+		rightBtn.x = difficulty.x + (difficulty.width * (#if MOBILE_BUILD 3 + #end 3.5));
 
 		leftBtn.y = difficulty.y;
 		rightBtn.y = leftBtn.y;
