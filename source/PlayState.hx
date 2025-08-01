@@ -31,7 +31,7 @@ class PlayState extends FlxState
 
 	public static var requestedBT:String;
 
-	var shootBtn:FlxSprite;
+	var shootBtn:GameplayButton;
 
 	override public function create()
 	{
@@ -79,18 +79,8 @@ class PlayState extends FlxState
 		burstText.screenCenter(X);
 		add(burstText);
 
-		shootBtn = new FlxSprite().loadGraphic('assets/images/shootBtn.png', true, 64, 64);
-		shootBtn.animation.add('idle', [0]);
-		shootBtn.animation.add('pressed', [1]);
-		shootBtn.animation.add('tapped', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1], 15, false);
-		shootBtn.animation.play('idle');
+		shootBtn = new GameplayButton('shootBtn');
 		add(shootBtn);
-		#if MOBILE_BUILD
-		shootBtn.scale.set(6, 6);
-		#else
-		shootBtn.scale.set(2, 2);
-		#end
-		shootBtn.screenCenter();
 
 		super.create();
 	}
