@@ -199,7 +199,18 @@ class PlayState extends FlxState
 		{
 			if (!endingEventHappened)
 			{
-				final followPlayer = FlxG.random.bool(FlxG.random.int(0, 100));
+				var fp_min = 0;
+				var fp_max = 100;
+
+				switch (DifficultyState.diff)
+				{
+					case 1:
+						fp_max = 25;
+					case 3:
+						fp_min = 75;
+				}
+
+				final followPlayer = FlxG.random.bool(FlxG.random.int(fp_min, fp_max));
 
 				if (followPlayer)
 				{
