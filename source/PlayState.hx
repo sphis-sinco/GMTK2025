@@ -111,6 +111,8 @@ class PlayState extends FlxState
 
 		if (shootBtn.animation.finished || shootBtn.animation.name == 'pressed' && !FlxG.mouse.overlaps(shootBtn))
 			shootBtn.animation.play('idle');
+		if (backBtn.animation.finished || backBtn.animation.name == 'pressed' && !FlxG.mouse.overlaps(backBtn))
+			backBtn.animation.play('idle');
 
 		if (!go)
 		{
