@@ -32,6 +32,7 @@ class PlayState extends FlxState
 	public static var requestedBT:String;
 
 	var shootBtn:GameplayButton;
+	var backBtn:GameplayButton;
 
 	override public function create()
 	{
@@ -65,7 +66,7 @@ class PlayState extends FlxState
 		highscoreText.y = scoreText.y + scoreText.height;
 
 		burstText = new FlxText(0, 0, 0, requestedBT, #if MOBILE_BUILD (FlxG.save.data.isNew == true) ? 32 : 64 #else 16 #end);
-		burstText.y = burstText.height;
+		burstText.y = burstText.height / 2;
 		burstText.alpha = 0;
 		burstText.alpha = 1;
 		FlxTween.tween(burstText, {alpha: 0}, (FlxG.save.data.isNew == true) ? 16.0 : 4.0, {
@@ -81,6 +82,9 @@ class PlayState extends FlxState
 
 		shootBtn = new GameplayButton('shootBtn');
 		add(shootBtn);
+
+		backBtn = new GameplayButton('backBtn');
+		add(backBtn);
 
 		super.create();
 	}
