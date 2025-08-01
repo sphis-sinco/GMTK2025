@@ -141,8 +141,7 @@ class PlayState extends FlxState
 					&& !(FlxG.mouse.x < playerHandRegion))
 					&& !FlxG.mouse.overlaps(playerHand)))
 			{
-				trace('back button region');
-
+				FlxG.watch.addQuick('Region', 'Back Button');
 				if (FlxG.mouse.pressed)
 					backBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
@@ -157,8 +156,7 @@ class PlayState extends FlxState
 					&& !(FlxG.mouse.x < playerHandRegion))
 					&& !FlxG.mouse.overlaps(playerHand)))
 			{
-				trace('shoot button region');
-
+				FlxG.watch.addQuick('Region', 'Shoot Button');
 				if (FlxG.mouse.pressed)
 					shootBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
@@ -171,7 +169,7 @@ class PlayState extends FlxState
 				&& (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > playerHandRegion))
 				&& FlxG.mouse.justReleased)
 			{
-				trace('player hand region');
+				FlxG.watch.addQuick('Region', 'Player');
 				switch (playerHand.animation.name.toLowerCase())
 				{
 					case 'rock':
@@ -184,6 +182,10 @@ class PlayState extends FlxState
 						playerPick = Rock;
 						playerHand.animation.play('rock');
 				}
+			}
+			else
+			{
+				FlxG.watch.addQuick('Region', 'None');
 			}
 
 			if (FlxG.keys.justReleased.ENTER)
