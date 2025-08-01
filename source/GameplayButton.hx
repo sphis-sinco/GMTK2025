@@ -14,9 +14,9 @@ class GameplayButton extends FlxSprite
 		animation.add('tapped', [0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1], 15, false);
 		animation.play('idle');
 		#if MOBILE_BUILD
-		scale.set(3, 3);
+		scale.set(6, 6);
 		#else
-		scale.set(1, 1);
+		scale.set(2, 2);
 		#end
 		screenCenter();
 	}

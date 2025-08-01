@@ -117,6 +117,9 @@ class PlayState extends FlxState
 			final playerHandRegion = (shootBtn.x + shootBtn.width) - (32 * 6);
 			final enemyHandRegion = (shootBtn.x - shootBtn.width) + (32 * 6);
 
+			final shootBtnRegion = shootBtn.y - (shootBtn.height * 2) - (32 * 2);
+			final backBtnRegion = backBtn.y + (backBtn.height * 2) + (32 * 2);
+
 			final enemyPickInt = FlxG.random.int(1, 3);
 
 			switch (enemyPickInt)
@@ -132,14 +135,35 @@ class PlayState extends FlxState
 					enemyHand.animation.play('scissors');
 			}
 
-			if (FlxG.mouse.overlaps(shootBtn)
-				|| ((FlxG.mouse.x < enemyHandRegion && !(FlxG.mouse.x < playerHandRegion)) && !FlxG.mouse.overlaps(playerHand)))
+			if (FlxG.mouse.overlaps(backBtn)
+				|| (((FlxG.mouse.y > backBtnRegion && FlxG.mouse.y < shootBtnRegion)
+					&& FlxG.mouse.x < enemyHandRegion
+					&& !(FlxG.mouse.x < playerHandRegion))
+					&& !FlxG.mouse.overlaps(playerHand)))
 			{
+				trace('back button region');
+
+				if (FlxG.mouse.pressed)
+					backBtn.animation.play('pressed');
+				if (FlxG.mouse.justReleased)
+				{
+					go = true;
+					backBtn.animation.play('tapped');
+				}
+			}
+			else if (FlxG.mouse.overlaps(shootBtn)
+				|| (((FlxG.mouse.y < shootBtnRegion && FlxG.mouse.y < backBtnRegion)
+					&& FlxG.mouse.x < enemyHandRegion
+					&& !(FlxG.mouse.x < playerHandRegion))
+					&& !FlxG.mouse.overlaps(playerHand)))
+			{
+				trace('shoot button region');
+
 				if (FlxG.mouse.pressed)
 					shootBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
 				{
-					go = true;
+					FlxG.switchState(() -> new DifficultyState());
 					shootBtn.animation.play('tapped');
 				}
 			}
@@ -147,6 +171,7 @@ class PlayState extends FlxState
 				&& (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > playerHandRegion))
 				&& FlxG.mouse.justReleased)
 			{
+				trace('player hand region');
 				switch (playerHand.animation.name.toLowerCase())
 				{
 					case 'rock':
