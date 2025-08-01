@@ -146,7 +146,7 @@ class PlayState extends FlxState
 					backBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
 				{
-					go = true;
+					FlxG.switchState(() -> new DifficultyState());
 					backBtn.animation.play('tapped');
 				}
 			}
@@ -161,7 +161,7 @@ class PlayState extends FlxState
 					shootBtn.animation.play('pressed');
 				if (FlxG.mouse.justReleased)
 				{
-					FlxG.switchState(() -> new DifficultyState());
+					go = true;
 					shootBtn.animation.play('tapped');
 				}
 			}
