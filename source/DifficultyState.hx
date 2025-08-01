@@ -50,6 +50,8 @@ class DifficultyState extends FlxState
 
 		if (FlxG.keys.justReleased.ENTER || (FlxG.mouse.overlaps(difficulty) && FlxG.mouse.justReleased))
 		{
+			PlayState.score = 0;
+			PlayState.requestedBT = null;
 			FlxG.switchState(() -> new PlayState());
 		}
 	}
