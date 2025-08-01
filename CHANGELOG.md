@@ -1,4 +1,5 @@
 # r4 - (7/31/2025)
+- Fixed Hint text positioning properly ([#6](https://github.com/sphis-sinco/Ropasci/issues/6))
 - The save is saved to disk on the application exit
 
 # r3 - (7/31/2025)
@@ -7,7 +8,7 @@
 - Massively overhauled the player and enemy regions
 - Changed shoot button (and escape button) to easily display if you're in their region
 - Added Difficulties
-- Fixed Hint text positioning [#6](https://github.com/sphis-sinco/Ropasci/issues/6)
+- Fixed Hint text positioning ([#6](https://github.com/sphis-sinco/Ropasci/issues/6))
 - Added escape button to gameplay that sends you back to the difficulty selection state
 - Added Difficulty Selection State - new starting state
 - Added different window titles for different compile targets

@@ -47,7 +47,7 @@ class PlayState extends FlxState
 		#end
 
 		if (requestedBT == null)
-			requestedBT = (FlxG.save.data.isNew == true) ? 'BEGIN!\n\nTap the right hand to change your selection' : 'BEGIN!';
+			requestedBT = (FlxG.save.data.isNew == true) ? 'Tap the right hand to change your selection' : 'BEGIN!';
 
 		playerHand = new HandClass();
 		add(playerHand);
