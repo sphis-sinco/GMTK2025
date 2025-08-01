@@ -165,11 +165,13 @@ class PlayState extends FlxState
 					shootBtn.animation.play('tapped');
 				}
 			}
-			else if (!FlxG.mouse.overlaps(shootBtn)
-				&& (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > playerHandRegion))
-				&& FlxG.mouse.justReleased)
+			else if (!FlxG.mouse.overlaps(shootBtn) && (FlxG.mouse.overlaps(playerHand) || (FlxG.mouse.x > playerHandRegion)))
 			{
 				FlxG.watch.addQuick('Region', 'Player');
+
+				if (!FlxG.mouse.justReleased)
+					return;
+
 				switch (playerHand.animation.name.toLowerCase())
 				{
 					case 'rock':
