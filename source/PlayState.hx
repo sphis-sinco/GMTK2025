@@ -116,8 +116,8 @@ class PlayState extends FlxState
 
 		if (!go)
 		{
-			final playerHandRegion = (shootBtn.x + shootBtn.width) - (32 * 6);
-			final enemyHandRegion = (shootBtn.x - shootBtn.width) + (32 * 6);
+			final playerHandRegion = (shootBtn.x + shootBtn.width) + (64 * 6);
+			final enemyHandRegion = (shootBtn.x - shootBtn.width) - (64 * 6);
 
 			final shootBtnRegion = shootBtn.y - (shootBtn.height * 2) - (32 * 2);
 			final backBtnRegion = backBtn.y + (backBtn.height * 2) + (32 * 2);
