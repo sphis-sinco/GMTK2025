@@ -9,6 +9,8 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 
+using StringTools;
+
 class PlayState extends FlxState
 {
 	var playerHand:HandClass;
@@ -114,6 +116,16 @@ class PlayState extends FlxState
 		if (backBtn.animation.finished || backBtn.animation.name == 'pressed' && !FlxG.mouse.overlaps(backBtn))
 			backBtn.animation.play('idle');
 
+		switch (playerPick)
+		{
+			case Rock:
+				playerHand.animation.play('rock');
+			case Paper:
+				playerHand.animation.play('paper');
+			case Scissors:
+				playerHand.animation.play('scissors');
+		}
+
 		if (!go)
 		{
 			final playerHandRegion = (shootBtn.x + shootBtn.width) + (64 * 6);
@@ -175,20 +187,27 @@ class PlayState extends FlxState
 			{
 				FlxG.watch.addQuick('Region', 'Player');
 
+				switch (playerPick)
+				{
+					case Rock:
+						playerHand.animation.play('selected-rock');
+					case Paper:
+						playerHand.animation.play('selected-paper');
+					case Scissors:
+						playerHand.animation.play('selected-scissors');
+				}
+
 				if (!FlxG.mouse.justReleased)
 					return;
 
-				switch (playerHand.animation.name.toLowerCase())
+				switch (playerPick)
 				{
-					case 'rock':
+					case Rock:
 						playerPick = Paper;
-						playerHand.animation.play('paper');
-					case 'paper':
+					case Paper:
 						playerPick = Scissors;
-						playerHand.animation.play('scissors');
-					default:
+					case Scissors:
 						playerPick = Rock;
-						playerHand.animation.play('rock');
 				}
 			}
 			else

@@ -1,4 +1,5 @@
 # r3 - (7/31/2025)
+- Added selected "animations" to the hands
 - Massively overhauled the player and enemy regions
 - Changed shoot button (and escape button) to easily display if you're in their region
 - Added Difficulties

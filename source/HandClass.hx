@@ -9,9 +9,12 @@ class HandClass extends FlxSprite
 		super(X, Y);
 
 		loadGraphic('assets/images/icons.png', true, 32, 32);
-		animation.add('rock', [1]);
-		animation.add('paper', [3]);
+		animation.add('rock', [0]);
+		animation.add('selected-rock', [1]);
+		animation.add('paper', [4]);
+		animation.add('selected-paper', [5]);
 		animation.add('scissors', [2]);
+		animation.add('selected-scissors', [3]);
 
 		animation.play('rock');
 
