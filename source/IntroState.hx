@@ -46,6 +46,9 @@ class IntroState extends FlxState
 
 		if (#if (debug && !html5) FlxG.mouse.justReleased || FlxG.keys.justReleased.ANY && #end!started)
 		{
+			if (started)
+				return;
+
 			started = true;
 
 			for (time in _times)
